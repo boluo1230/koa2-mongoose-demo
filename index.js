@@ -58,5 +58,11 @@ app.use(async (ctx, next) => {
 
 // router(app)
 app.use(router())
+
+app.use(async (ctx, next) => {
+  await ctx.render('404', {
+    title: 'page not find'
+  })
+})
 if (!module.parent) app.listen(CONFIG.port)
 console.log(`server is running at http://localhost:${CONFIG.port}`)

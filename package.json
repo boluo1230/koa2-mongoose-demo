@@ -1,7 +1,7 @@
 {
-  "name": "node-blog",
+  "name": "koa2-mongoose-demo",
   "version": "1.0.0",
-  "description": "Koa2 + MongoDB 搭建博客系统",
+  "description": "koa2-mongoose-demo",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js"

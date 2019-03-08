@@ -1,8 +1,8 @@
 module.exports = {
   port: process.env.PORT || 3000,
   session: {
-    key: 'eric',
+    key: 'boluo1230',
     maxAge: 86400000
   },
-  mongodb: 'mongodb://localhost:27017/eric'
+  mongodb: 'mongodb://localhost:27017/node-demo'
 }

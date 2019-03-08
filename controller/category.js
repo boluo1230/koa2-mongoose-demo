@@ -1,9 +1,7 @@
 const CategoryModel = require('../models/category')
-const Router = require('koa-router')
-const router = new Router()
 
 module.exports = {
-  async create(ctx, next) {
+  async create (ctx, next) {
     if (ctx.method === 'GET') {
       await ctx.render('create_category', {
         title: '新建分类'
@@ -25,7 +23,7 @@ module.exports = {
     await CategoryModel.create(ctx.request.body)
     ctx.redirect('/category')
   },
-  async list(ctx, next) {
+  async list (ctx, next) {
     const categories = await CategoryModel.find({})
     await ctx.render('category', {
       title: '新建分类',
@@ -42,7 +40,7 @@ module.exports = {
   //     })
   //   }
   // },
-  async destroy(ctx, next) {
+  async destroy (ctx, next) {
     const cid = ctx.params.id
     if (cid.length !== 24) {
       ctx.throw(404, '分类不存在')
