@@ -1,14 +1,8 @@
-const CategoryModel = require('../models/category')
-const {Success} = require('../constants/BaseResult')
+const {Success, ErrorMessage} = require('../constants/BaseResult')
+const {categoryService} = require('../service')
 
 module.exports = {
   async create (ctx, next) {
-    if (ctx.method === 'GET') {
-      await ctx.render('create_category', {
-        title: '新建分类'
-      })
-      return
-    }
     const {name, title} = ctx.request.body
     let errMsg = ''
     if (name === '') {
@@ -17,40 +11,26 @@ module.exports = {
       errMsg = '分类标题不能为空'
     }
     if (errMsg) {
-      ctx.flash = {warning: errMsg}
-      ctx.redirect('back')
+      ctx.throw(400, errMsg)
       return
     }
-    await CategoryModel.create(ctx.request.body)
-    ctx.redirect('/category')
+    await categoryService.create(ctx.request.body)
+    ctx.body = new Success()
   },
   async list (ctx, next) {
-    const categories = await CategoryModel.find({})
-    await ctx.render('category', {
-      title: '新建分类',
-      categories
-    })
+    const categories = categoryService.find({})
+    ctx.body = new Success(categories)
   },
-  // TODO
-  // async edit (ctx, next) {
-  //   if (ctx.method === 'GET') {
-  //     const category = await CategoryModel.findById(ctx.params.id)
-  //     await ctx.render('create_category', {
-  //       title: '编辑分类',
-  //       category
-  //     })
-  //   }
-  // },
   async destroy (ctx, next) {
     const cid = ctx.params.id
     if (cid.length !== 24) {
       ctx.throw(404, '分类不存在')
     }
-    const category = await CategoryModel.findById(cid)
+    const category = await categoryService.findById(cid)
     if (!category) {
       ctx.throw(404, '分类不存在')
     }
-    await CategoryModel.findByIdAndRemove(cid)
+    await categoryService.findByIdAndRemove(cid)
     ctx.body = new Success()
   }
 }
