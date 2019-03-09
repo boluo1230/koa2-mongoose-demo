@@ -6,7 +6,7 @@ class CategoryService {
   }
 
   async find (query) {
-    return CategoryModel.find({})
+    return CategoryModel.find(query)
   }
 
   async findById (cid) {

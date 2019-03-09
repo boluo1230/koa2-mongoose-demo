@@ -4,7 +4,8 @@
   "description": "koa2-mongoose-demo",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon src/index.js",
+    "pack": "webpack --config build/webpack.config.js --log-level=debug"
   },
   "husky": {
     "hooks": {
@@ -28,6 +29,10 @@
   },
   "homepage": "",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-latest": "^6.24.1",
+    "babel-polyfill": "^6.26.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.19.1",
@@ -40,7 +45,9 @@
     "jest": "^23.1.0",
     "lint-staged": "^7.1.0",
     "nodemon": "^1.17.5",
-    "supertest": "^3.1.0"
+    "supertest": "^3.1.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2"
   },
   "config": {
     "commitizen": {
@@ -54,6 +61,7 @@
     ]
   },
   "dependencies": {
+    "crypto": "^1.0.1",
     "bcryptjs": "^2.4.3",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
@@ -61,10 +69,7 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.1",
     "koa-static": "^4.0.2",
-    "koa-views": "^6.1.4",
     "marked": "^0.4.0",
-    "mongoose": "^5.1.2",
-    "nunjucks": "^3.1.2",
-    "require-directory": "^2.1.1"
+    "mongoose": "^5.1.2"
   }
 }

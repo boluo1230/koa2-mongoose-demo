@@ -1,7 +1,6 @@
 const Koa = require('koa')
 const path = require('path')
 const serve = require('koa-static')
-const views = require('koa-views')
 const session = require('koa-session')
 const bodyParser = require('koa-bodyparser')
 const mongoose = require('mongoose')
@@ -41,12 +40,8 @@ app.use(session({
 app.use(flash())
 
 app.use(serve(
-  path.join(__dirname, 'public')
+  path.resolve(__dirname, 'public')
 ))
-
-app.use(views(path.join(__dirname, 'views'), {
-  map: {html: 'nunjucks'}
-}))
 
 // app.use(checkAuth())
 
