@@ -48,7 +48,7 @@ app.use(views(path.join(__dirname, 'views'), {
   map: {html: 'nunjucks'}
 }))
 
-app.use(checkAuth())
+// app.use(checkAuth())
 
 app.use(async (ctx, next) => {
   ctx.state.ctx = ctx
