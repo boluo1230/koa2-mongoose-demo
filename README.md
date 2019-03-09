@@ -35,6 +35,7 @@
 ├── routes                   // 路由
 ├── copntroller              // api function
 ├── constants                // 异常，结果处理等静态变量
+├── service                  // 与数据库和api之间的逻辑处理
 ├── .gitignore               //git忽略文件
 </pre>
 
