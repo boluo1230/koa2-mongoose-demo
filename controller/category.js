@@ -1,4 +1,5 @@
 const CategoryModel = require('../models/category')
+const {Success} = require('../constants/BaseResult')
 
 module.exports = {
   async create (ctx, next) {
@@ -50,7 +51,6 @@ module.exports = {
       ctx.throw(404, '分类不存在')
     }
     await CategoryModel.findByIdAndRemove(cid)
-    ctx.flash = {success: '删除分类成功'}
-    ctx.redirect('/category')
+    ctx.body = new Success()
   }
 }
