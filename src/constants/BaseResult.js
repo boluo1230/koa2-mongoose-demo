@@ -17,6 +17,13 @@ class BaseResult {
     }
   }
 
+  BaseResult (code, msg) {
+    this.code = code
+    if (msg) {
+      this.msg = msg
+    }
+  }
+
   static create (code, msg) {
     if (code === null || code < 0) {
       throw new Error('code must greater than 0')
@@ -44,9 +51,9 @@ class Success extends BaseResult {
 }
 
 class ErrorResult extends BaseResult {
-  constructor (msg) {
-    super(ConstantCode.CODE_ERROR, null, msg)
+  constructor (code, msg) {
+    super(ConstantCode.CODE_ERROR, msg)
   }
 }
 
-module.exports = { ErrorMessage: BaseResult, Success, Error: ErrorResult, ErrorCode: ConstantCode }
+module.exports = {ErrorMessage: BaseResult, Success, Error: ErrorResult, ErrorCode: ConstantCode}
