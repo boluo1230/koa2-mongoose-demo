@@ -1,18 +1,14 @@
-const {Success, ErrorMessage} = require('../constants/BaseResult')
+const {Success} = require('../constants/BaseResult')
 const {categoryService} = require('../service')
+const {paramException, tagNameException, tagTitleException} = require('../constants/CustomException')
 
 module.exports = {
   async create (ctx, next) {
     const {name, title} = ctx.request.body
-    let errMsg = ''
     if (name === '') {
-      errMsg = '分类名不能为空'
+      ctx.throw(tagNameException.code, tagNameException.msg)
     } else if (title === '') {
-      errMsg = '分类标题不能为空'
-    }
-    if (errMsg) {
-      ctx.throw(400, errMsg)
-      return
+      ctx.throw(tagTitleException.code, tagTitleException.msg)
     }
     await categoryService.create(ctx.request.body)
     ctx.body = new Success()
@@ -24,11 +20,11 @@ module.exports = {
   async destroy (ctx, next) {
     const cid = ctx.params.id
     if (cid.length !== 24) {
-      ctx.throw(404, '分类不存在')
+      ctx.throw(paramException.code, paramException.msg)
     }
     const category = await categoryService.findById(cid)
     if (!category) {
-      ctx.throw(404, '分类不存在')
+      ctx.throw(paramException.code, paramException.msg)
     }
     await categoryService.findByIdAndRemove(cid)
     ctx.body = new Success()
